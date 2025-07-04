@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="user-scalable=yes" />
+    <meta name="keywords" content="" />
+    <meta name="description" content=" " />
+    <title>决胜千里</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="pc/css/swiper-bundle.min.css"
+    />
+    <link rel="stylesheet" type="text/css" href="pc/css/dms005.css" />
+    <link rel="stylesheet" type="text/css" href="pc/css/animate.css" />
+    <script type="text/javascript" src="pc/js/jquery.min.js"></script>
+    <script
+      type="text/javascript"
+      src="pc/js/jquery.SuperSlide.2.1.3.js"
+    ></script>
+    <script type="text/javascript" src="pc/js/swiper-bundle.min.js"></script>
+    <script
+      type="text/javascript"
+      src="http://www.st1700.com/agent/js/jquery.dms-pc.js"
+    ></script>
+    <!--script type="text/javascript">
+    //判断页面是PC打开还是手机打开
+        if (/AppleWebKit.*Mobile/i.test(navigator.userAgent) || (/MIDP|SymbianOS|NOKIA|SAMSUNG|LG|NEC|TCL|Alcatel|BIRD|DBTEL|Dopod|PHILIPS|HAIER|LENOVO|MOT-|Nokia|SonyEricsson|SIE-|Amoi|ZTE/.test(navigator.userAgent))) {
+        if (window.location.href.indexOf("?mobile") < 0) {
+            try {
+                if (/Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+                    window.location.href = "http://域名地址/wap/index.html" + location.search;//请将“域名地址”改成您的实际域名地址
+                } else if (/iPad/i.test(navigator.userAgent)) {
+                } else {
+                    window.location.href = "http://域名地址/wap/index.html" + location.search;//请将“域名地址”改成您的实际域名地址
+                }
+            } catch (e) { }
+        }
+    }
+  </script-->
+  </head>
+
+  <body>
+    <!--弹窗适龄提示-->
+    <div class="md-modal md-effect-1" id="modal-cadpa">
+      <div class="md-content">
+        <h3>适龄提示</h3>
+        <div class="md-main">
+          <div class="cadpa-img">
+            <img src="pc/images/logo.png" class="gamelogo" />
+            <img src="pc/images/icon16.png" />
+          </div>
+          <p>
+            1、本游戏是一款玩法多样的3D大型角色扮演类网络游戏，适用于年满16周岁以上的用户，建议未成年人在家长监护下使用游戏产品。
+          </p>
+          <p>
+            2、本游戏基于架空的故事背景和幻想世界观，玩家可自由选择具有不同能力的职业，在宏大的游戏世界中展开冒险。游戏画面色彩鲜明，操作简单，技能、装备设计多样，玩法、活动丰富多彩。游戏内还有多种社交系统，鼓励玩家通过合作与竞争达成游戏目标。
+          </p>
+          <p>
+            3、本游戏中有用户实名认证系统，未实名的用户不能登录游戏。认证为未成年人的用户登录游戏将会受到以下限制：
+            <span
+              >根据防沉迷规定要求，未成年用户可在周五、周六、周日和法定节假日每日晚20时至21时登录游戏，其他时间无法登录游戏。</span
+            >
+            <span
+              >未满8周岁的用户不能付费；8周岁以上未满16周岁的未成年人用户，单次充值金额不得超过50元人民币，每月充值金额累计不得超过200元人民币；16周岁以上的未成年人用户，单次充值金额不得超过100元人民币，每月充值金额累计不得超过400元人民币。</span
+            >
+            <span
+              >为营造有利于未成年人健康成长的良好环境，落实企业社会责任，本游戏运营商有权不对未成年人提供服务。</span
+            >
+          </p>
+          <p>
+            4、游戏中可运用丰富的操作技巧进行战斗，有助于提升玩家的手眼协调能力。传承经典设定的同时，游戏版本多样，拥有众多创新玩法，让玩家可以纵享自由切磋，任凭热血澎湃。游戏三端互通，电脑、安卓、苹果设备进入同一世界，共享同一份情谊。除此之外，本游戏大胆地引入市场经济，在游戏中设置了完善的交易系统，结合“装备全爆、自由合成”的设定，营造一个更加自由和公平的游戏环境。
+          </p>
+        </div>
+        <button class="md-close">关 闭</button>
+      </div>
+    </div>
+    <div class="md-overlay"></div>
+    <!--弹窗适龄提示end-->
+
+    <!--bannerimg-->
+    <div id="bannerbox">
+      <div id="banner">
+        <!--适龄提示-->
+        <div id="cadpa">
+          <a href="javascript:;" class="md-trigger" data-modal="modal-cadpa"
+            ><img src="pc/images/icon16.png" alt=""
+          /></a>
+        </div>
+        <!--适龄提示end-->
+        <!--banner视频-->
+        <div
+          class="play-video wow bounceIn"
+          vpath="pc/images/home-video.jpg"
+          ipath="pc/video/dms2.mp4"
+          data-wow-delay=".6s"
+        ></div>
+        <div class="videobox"></div>
+        <script type="text/javascript">
+          $(".play-video").each(function () {
+            //遍历视频列表
+            $(this).hover(
+              function () {
+                //鼠标移上来后显示播放按钮
+                $(this).find(".videoed").show();
+              },
+              function () {
+                $(this).find(".videoed").show();
+              }
+            );
+            $(this).click(function () {
+              //这个视频被点击后执行
+              var img = $(this).attr("vpath"); //获取视频预览图
+              var video = $(this).attr("ipath"); //获取视频路径
+              $(".videobox").html(
+                '<div class=\'videos\'><img onClick="close1()" class="vclose" src="pc/images/btn-close.png" width="45" height="45"/><video id="video" poster=\'' +
+                  img +
+                  "' style='width:820px; position: relative; z-index:999;' src='" +
+                  video +
+                  '\' preload="auto" controls="controls" loop="ture" autoplay="autoplay"></video></div><div class=\'video-bg\'></div>'
+              );
+              $(".videobox").show();
+            });
+          });
+          function close1() {
+            //var v = document.getElementById('videolist');//获取视频节点
+            $(".videobox").hide(); //点击关闭按钮关闭暂停视频
+            v.pause();
+            $(".videobox").html();
+          }
+        </script>
+        <!--banner视频end-->
+        <!--下载-->
+        <div class="gamedown005 wow fadeInUp">
+          <!-- 请将"下载地址"修改为文件的实际下载地址 -->
+          <div class="pc wow bounceInLeft" data-wow-delay=".3s">
+            <a
+              href="javascript:;"
+              onmouseover="displayPC()"
+              onmouseout="hidePC()"
+            >
+              <i class="iconfont donghua">&#xe60c;</i> <span>端游下载</span>
+            </a>
+            <div id="boxPC" onmouseover="keepPC()" onmouseout="hidePC()">
+              <img src="pc/images/code.png" />
+            </div>
+          </div>
+          <div class="mobile wow bounceInRight" data-wow-delay=".3s">
+            <a
+              href="javascript:;"
+              onmouseover="displayMobile()"
+              onmouseout="hideMobile()"
+            >
+              <i class="iconfont donghua">&#xe650;</i> <span>手游下载</span>
+            </a>
+            <div
+              id="boxMobile"
+              onmouseover="keepMobile()"
+              onmouseout="hideMobile()"
+            >
+              <img src="pc/images/code.png" />
+            </div>
+          </div>
+
+          <script>
+            var pcTimer, mobileTimer;
+
+            function displayPC() {
+              clearTimeout(pcTimer);
+              document.getElementById("boxPC").style.display = "block";
+            }
+
+            function keepPC() {
+              clearTimeout(pcTimer);
+              document.getElementById("boxPC").style.display = "block";
+            }
+
+            function hidePC() {
+              pcTimer = setTimeout(function () {
+                document.getElementById("boxPC").style.display = "none";
+              }, 100);
+            }
+
+            function displayMobile() {
+              clearTimeout(mobileTimer);
+              document.getElementById("boxMobile").style.display = "block";
+            }
+
+            function keepMobile() {
+              clearTimeout(mobileTimer);
+              document.getElementById("boxMobile").style.display = "block";
+            }
+
+            function hideMobile() {
+              mobileTimer = setTimeout(function () {
+                document.getElementById("boxMobile").style.display = "none";
+              }, 100);
+            }
+          </script>
+        </div>
+        <!-- 下载 end-->
+        <div id="logo" class="wow flipInY">
+          <img src="pc/images/logo.png" alt="" />
+        </div>
+        <div class="txt1 wow fadeInDown" data-wow-delay=".3s"></div>
+        <div class="txt2 wow fadeInDown" data-wow-delay=".3s">
+          <img src="pc/images/bannertxt2.png" alt="" />
+        </div>
+        <div class="bannervideo">
+          <video
+            src="pc/video/dms.mp4"
+            autoplay="autoplay"
+            loop="true"
+            autobuffer=""
+            muted=""
+          ></video>
+        </div>
+        <div id="bannerbg">
+          <img src="pc/images/banner.jpg" alt="" />
+        </div>
+        <img src="pc/images/banner.jpg" class="heightself" />
+      </div>
+    </div>
+    <!--bannerimg end-->
+
+    <div class="mainboxtop newsbg">
+      <!--游戏介绍-->
+      <div class="newsbox wow bounceInUp" data-wow-delay="1s">
+        <!--图片轮播-->
+        <div class="focus">
+          <div class="swiper-container1">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide"><img src="pc/images/news01.jpg" /></div>
+              <div class="swiper-slide"><img src="pc/images/news02.jpg" /></div>
+              <div class="swiper-slide"><img src="pc/images/news03.jpg" /></div>
+            </div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination pag1"></div>
+            <!-- Add Arrows -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+          </div>
+          <script>
+            var swiper = new Swiper(".swiper-container1", {
+              slidesPerView: 1,
+              loop: true,
+              navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+              },
+              pagination: {
+                el: ".pag1",
+              },
+            });
+          </script>
+        </div>
+        <!--图片轮播-->
+        <!-- 新闻tab列表 -->
+        <div class="newslist">
+          <div class="hd clearfix">
+            <ul>
+              <li class="on">新闻公告</li>
+              <li>游戏特色</li>
+              <li>开合区规则</li>
+            </ul>
+          </div>
+          <div class="bd">
+            <ul>
+              <li>
+                <a href="#" target="_blank"
+                  >[无文案内容]：请根据实际需要右键打开方式，选择软件编辑index.html中的文字</a
+                ><span>08-19</span>
+              </li>
+              <li>
+                <a href="#" target="_blank"
+                  >[无文案内容]：请根据实际需要右键打开方式，选择软件编辑index.html中的文字......</a
+                ><span>08-19</span>
+              </li>
+              <li>
+                <a href="#" target="_blank"
+                  >[无文案内容]：请根据实际需要右键打开方式，选择软件编辑index.html中的文字</a
+                ><span>08-19</span>
+              </li>
+              <li>
+                <a href="#" target="_blank"
+                  >[无文案内容]：请根据实际需要右键打开方式，选择软件编辑index.html中的文字</a
+                ><span>08-19</span>
+              </li>
+              <li>
+                <a href="#" target="_blank"
+                  >[无文案内容]：请根据实际需要右键打开方式，选择软件编辑index.html中的文字......</a
+                ><span>08-19</span>
+              </li>
+              <li>
+                <a href="#" target="_blank"
+                  >[无文案内容]：请根据实际需要右键打开方式，选择软件编辑index.html中的文字</a
+                ><span>08-19</span>
+              </li>
+            </ul>
+            <ul>
+              <li class="para">
+                <p>
+                  [无文案内容]：请根据实际需要右键打开方式，选择软件编辑index.html中的文字,自定义段落文字内容自定义段落文字内容自定义段落文字内容自定义段落文字内容自定义段落文字内容自定义段落文字内容自定义段落文字内容自定义段落文字......<a
+                    href="#"
+                    >[详细]</a
+                  >
+                </p>
+              </li>
+              <li class="para">
+                <p>
+                  [无文案内容]：请根据实际需要右键打开方式，选择软件编辑index.html中的文字,自定义段落文字内容自定义段落文字内容自定义段落文字内容自定义段落文字内容自定义段落文字内容自定义段落文字内容自定义段落文字内容......<a
+                    href="#"
+                    >[详细]</a
+                  >
+                </p>
+              </li>
+            </ul>
+            <ul>
+              <li>
+                <a href="#" target="_blank"
+                  >[无文案内容]：请根据实际需要右键打开方式，选择软件编辑index.html中的文字</a
+                ><span>08-19</span>
+              </li>
+              <li>
+                <a href="#" target="_blank"
+                  >[无文案内容]：请根据实际需要右键打开方式，选择软件编辑index.html中的文字</a
+                ><span>08-19</span>
+              </li>
+              <li>
+                <a href="#" target="_blank"
+                  >[无文案内容]：请根据实际需要右键打开方式，选择软件编辑index.html中的文字......</a
+                ><span>08-19</span>
+              </li>
+              <li>
+                <a href="#" target="_blank"
+                  >[无文案内容]：请根据实际需要右键打开方式，选择软件编辑index.html中的文字</a
+                ><span>08-19</span>
+              </li>
+              <li>
+                <a href="#" target="_blank"
+                  >[无文案内容]：请根据实际需要右键打开方式，选择软件编辑index.html中的文字</a
+                ><span>08-19</span>
+              </li>
+              <li>
+                <a href="#" target="_blank"
+                  >[无文案内容]：请根据实际需要右键打开方式，选择软件编辑index.html中的文字......</a
+                ><span>08-19</span>
+              </li>
+            </ul>
+          </div>
+          <!-- tab列表end -->
+        </div>
+        <script type="text/javascript">
+          jQuery(".newslist").slide({
+            autoPlay: false,
+            trigger: "mouseover",
+            delayTime: 700,
+            pnLoop: false,
+          }); //tab切换
+        </script>
+        <!-- 新闻tab列表end -->
+      </div>
+      <!--游戏介绍end-->
+    </div>
+
+    <!--游戏特色-->
+    <div class="tese">
+      <div class="title title-tese wow fadeInDown">
+        <p>经典复古 ●全新演绎 ● 江湖再见</p>
+      </div>
+      <!--图片轮播-->
+      <div class="mainbox wow fadeInUp">
+        <div class="teselist">
+          <!-- Swiper -->
+          <div class="swiper-container2 wow bounceIn">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide"><img src="pc/images/tese01.png" /></div>
+              <div class="swiper-slide"><img src="pc/images/tese02.png" /></div>
+              <div class="swiper-slide"><img src="pc/images/tese03.png" /></div>
+            </div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+          </div>
+          <!-- Swiper JS -->
+          <script>
+            var swiper = new Swiper(".swiper-container2", {
+              effect: "coverflow",
+              grabCursor: true,
+              centeredSlides: true,
+              slidesPerView: "auto",
+              coverflowEffect: {
+                rotate: 0, //透视角度
+                stretch: 700, //重合度
+                depth: 300,
+                modifier: 1,
+                slideShadows: false,
+              },
+              navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+              },
+              centeredSlides: true,
+              loop: true,
+              pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+              },
+            });
+          </script>
+        </div>
+      </div>
+      <!--图片轮播end-->
+    </div>
+    <!--游戏特色end-->
+
+    <!--游戏截图-->
+    <div class="jietu">
+      <div class="title title-jietu wow fadeInDown">
+        <p>山河动荡 ● 寒风孤影 ● 等君来助</p>
+      </div>
+      <div class="mainbox jietulist">
+        <ul>
+          <li class="wow fadeInUp"><img src="pc/images/jietu01.jpg" /></li>
+          <li class="wow fadeInUp"><img src="pc/images/jietu02.jpg" /></li>
+          <li class="wow fadeInUp"><img src="pc/images/jietu03.jpg" /></li>
+        </ul>
+      </div>
+    </div>
+    <!--游戏截图 end-->
+
+    <!-- 底部版权 -->
+    <div id="footer">
+      <div class="mainbox">
+        <div class="footerlogo">
+          <a href="#" target="_blank"
+            ><img src="pc/images/logo.png" alt=""
+          /></a>
+        </div>
+        <div class="copyright">
+          <p class="tips">
+            <b>健康游戏忠告：</b
+            >抵制不良游戏，拒绝盗版游戏。注意自我保护，谨防受骗上当。
+            适度游戏益脑，沉迷游戏伤身。合理安排时间，享受健康生活。
+          </p>
+          <p class="tips">
+            <b>适龄提示：</b
+            >本游戏适合16岁以上的成年人进入，请您确定已如实进行实名认证，为了您的健康，请合理控制游戏时间，适度娱乐，理性消费。
+          </p>
+        </div>
+      </div>
+    </div>
+    <!-- 底部版权end -->
+
+    <!-- 右侧浮动 -->
+    <div id="right_max" class="fixedbox wow fadeInRight">
+      <div class="h5close">
+        <a class="h5btn" onclick="rm_hidden()"
+          >隐<br />藏<br /><img src="pc/images/btn_close.png"
+        /></a>
+      </div>
+      <div class="h5bar">
+        <div class="rightlogo">
+          <a href="#" target="_blank"
+            ><img src="pc/images/logo.png" alt=""
+          /></a>
+        </div>
+        <!--
+        <div class="qq">
+          <div>
+            <p>QQ客服A</p>
+            <a href="#" target="_blank"
+              ><img src="pc/images/fixed-qq1.png" alt=""
+            /></a>
+          </div>
+          <div>
+            <p>QQ客服B</p>
+            <a href="#" target="_blank"
+              ><img src="pc/images/fixed-qq1.png" alt=""
+            /></a>
+          </div>
+        </div>
+        <div class="group">
+          <p>玩家交流群1</p>
+          <a href="#" target="_blank"
+            ><img src="pc/images/fixed-qq2.png" alt=""
+          /></a>
+        </div>
+        <div class="group">
+          <p>玩家交流群2</p>
+          <a href="#" target="_blank"
+            ><img src="pc/images/fixed-qq2.png" alt=""
+          /></a>
+        </div>
+        <div class="kefutime">客服时间：09:00-22:00</div>
+        <div class="chongzhi">
+          <a href="#" target="_blank"
+            ><img src="pc/images/fixed-chongzhi.png"
+          /></a>
+        </div>
+        -->
+        <div class="code">
+          <p>抖音扫一扫 关注我们</p>
+          <div onmouseover="displayFloatQR()" onmouseout="hideFloatQR()">
+            <img src="pc/images/code.png" alt="" />
+            <div id="boxFloatQR">
+              <img src="pc/images/code.png" alt="抖音二维码" />
+            </div>
+          </div>
+        </div>
+        <div class="top">
+          <a
+            href="javascript:void(0)"
+            onClick="$('html,body').animate({scrollTop: '0px'}, 500);return false;window.scrollTo(0,0);return false;"
+            target="_blank"
+            title="返回顶部"
+            ><img src="pc/images/backtop.png" alt=""
+          /></a>
+        </div>
+      </div>
+    </div>
+    <div id="right_min" class="h5open" style="display: none">
+      <a class="h5btn" onclick="rm_show()"
+        >下<br />载<br />安<br />装<img src="pc/images/btn_open.png"
+      /></a>
+    </div>
+    <script type="text/javascript">
+      function rm_show() {
+        document.getElementById("right_max").style.display = "";
+        document.getElementById("right_min").style.display = "none";
+      }
+      function rm_hidden() {
+        document.getElementById("right_max").style.display = "none";
+        document.getElementById("right_min").style.display = "";
+      }
+
+      // 浮动二维码相关函数
+      var floatQRTimer;
+      var isFloatQRVisible = false;
+
+      function displayFloatQR() {
+        console.log(`displayFloatQR`);
+        clearTimeout(floatQRTimer);
+        document.getElementById("boxFloatQR").style.display = "block";
+        isFloatQRVisible = true;
+      }
+
+      function keepFloatQR() {
+        console.log(`keepFloatQR`);
+        clearTimeout(floatQRTimer);
+        document.getElementById("boxFloatQR").style.display = "block";
+      }
+
+      function hideFloatQR() {
+        console.log(`hideFloatQR`);
+        floatQRTimer = setTimeout(function () {
+          document.getElementById("boxFloatQR").style.display = "none";
+          isFloatQRVisible = false;
+        }, 200);
+      }
+    </script>
+    <!-- 右侧浮动end -->
+
+    <!-- 背景音乐 -->
+    <div id="musicbox">
+      <audio
+        loop
+        src="pc/audio/music.mp3"
+        autoplay="true"
+        loop="true"
+        id="music"
+      ></audio>
+      <a class="play" id="music-btn" href="javascript:;">　</a>
+    </div>
+    <script src="pc/js/qrcode.js"></script>
+    <script>
+      jQuery(
+        (function ($, QRCode) {
+          // 音乐
+          var music = $("#music")[0];
+          if (music) {
+            music.play();
+            document.addEventListener(
+              "WeixinJSBridgeReady",
+              function () {
+                music.play();
+              },
+              false
+            );
+            $("#music-btn").click(function () {
+              if (music.paused) {
+                music.play();
+                $(this).addClass("play");
+              } else {
+                music.pause();
+                $(this).removeClass("play");
+              }
+            });
+          }
+        })(jQuery, QRCode)
+      );
+    </script>
+    <!-- 背景音乐 end -->
+
+    <!--动画js-->
+    <script type="text/javascript" src="pc/js/wow.min.js"></script>
+    <script type="text/javascript">
+      //页面加载动画
+      if (!/msie [6|7|8|9]/i.test(navigator.userAgent)) {
+        new WOW().init();
+      }
+    </script>
+
+    <!--弹窗js-->
+    <script src="pc/js/classie.js"></script>
+    <script src="pc/js/modalEffects.js"></script>
+
+    <div style="display: none">
+      <script
+        type="text/javascript"
+        src="https://v1.cnzz.com/z_stat.php?id=1280866021&web_id=1280866021"
+      ></script>
+    </div>
+    <!-- 其中gid=后面的数字为分组编号，请将“123456”替换为自己需要的数字 -->
+    <!-- <script id="script-statistic" language="JavaScript" src="http://stat.173uu.com/static/js/wgtg/statistic.js?gid=123456"></script> -->
+  </body>
+</html>
