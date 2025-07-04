@@ -540,20 +540,17 @@
       var isFloatQRVisible = false;
 
       function displayFloatQR() {
-        console.log(`displayFloatQR`);
         clearTimeout(floatQRTimer);
         document.getElementById("boxFloatQR").style.display = "block";
         isFloatQRVisible = true;
       }
 
       function keepFloatQR() {
-        console.log(`keepFloatQR`);
         clearTimeout(floatQRTimer);
         document.getElementById("boxFloatQR").style.display = "block";
       }
 
       function hideFloatQR() {
-        console.log(`hideFloatQR`);
         floatQRTimer = setTimeout(function () {
           document.getElementById("boxFloatQR").style.display = "none";
           isFloatQRVisible = false;

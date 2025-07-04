@@ -433,7 +433,7 @@ img{border:0;vertical-align:top; }
 /* 浮动二维码样式 */
 #boxFloatQR {
     display: none;
-    width: 200px;
+    width: 200%;
     height: auto;
     position: absolute;
     right: 100%;
@@ -456,19 +456,6 @@ img{border:0;vertical-align:top; }
     min-height: 150px;
 }
 
-/* 手机端适配 */
-@media (max-width: 768px) {
-    #boxFloatQR {
-        width: 180px;
-        padding: 10px;
-        margin-right: 5px;
-    }
-    
-    #boxFloatQR img {
-        min-width: 120px;
-        min-height: 120px;
-    }
-}
 
 /* 为原始二维码容器添加相对定位 */
 .code > div {
