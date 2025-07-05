@@ -55,7 +55,7 @@ img{border:0;vertical-align:top; }
 	height: 25%; /* LOGO高度除以BANNER图片的高度*/
 	position: absolute;
 	left:32%;
-	top:30px;
+	top:40px;
 	z-index: 99;
 	text-align: center;
 	
