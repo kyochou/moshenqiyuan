@@ -1,0 +1,94 @@
+/* 故事页面通用样式 */
+.news-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 10px;
+  margin-top: 50px;
+}
+
+.news-header {
+  text-align: center;
+  border-bottom: 2px solid #d4af37;
+  padding-bottom: 20px;
+  margin-bottom: 30px;
+}
+
+.news-title {
+  font-size: 28px;
+  color: #d4af37;
+  margin-bottom: 10px;
+}
+
+.news-date {
+  color: #ccc;
+  font-size: 14px;
+}
+
+.news-content {
+  line-height: 1.8;
+  font-size: 16px;
+}
+
+.news-content h3 {
+  color: #d4af37;
+  margin: 20px 0 10px 0;
+}
+
+.news-content ul {
+  margin: 10px 0;
+  padding-left: 20px;
+}
+
+.news-content li {
+  margin: 5px 0;
+}
+
+body {
+  background: url("../images/bg-body.jpg") center center;
+  background-size: cover;
+  min-height: 100vh;
+}
+
+.highlight {
+  background: linear-gradient(45deg, #d4af37, #fff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+}
+
+/* 移动设备优化 */
+@media (max-width: 768px) {
+  .news-container {
+    margin: 20px 10px;
+    padding: 15px;
+  }
+
+  .news-title {
+    font-size: 24px;
+  }
+
+  .news-content {
+    font-size: 15px;
+  }
+}
+
+.last-sentence em {
+  color: #d4af37;
+  font-size: 18px;
+  display: block;
+  margin-bottom: 10px;
+}
+.signature {
+  font-size: 18px;
+  text-align: right;
+  margin-top: 30px;
+  font-style: italic;
+  color: #d4af37;
+}
+.signature strong {
+  color: #fff;
+  font-style: normal;
+}
