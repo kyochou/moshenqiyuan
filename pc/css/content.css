@@ -30,6 +30,8 @@
 .news-content {
   line-height: 1.8;
   font-size: 16px;
+  max-width: 80%;
+  margin: 0 auto;
 }
 
 .news-content h3 {
@@ -52,8 +54,15 @@ body {
   min-height: 100vh;
 }
 
+strong {
+  background: #d4af37;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+}
+
 .highlight {
-  background: linear-gradient(45deg, #d4af37, #fff);
+  background: #d4af37;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-weight: bold;
