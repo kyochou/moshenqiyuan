@@ -31,7 +31,7 @@
   line-height: 1.8;
   font-size: 16px;
   max-width: 80%;
-  margin: 0 auto;
+  margin: 0 auto 60px auto;
 }
 
 .news-content h3 {
@@ -62,7 +62,7 @@ strong {
 }
 
 .highlight {
-  background: #d4af37;
+  background: #ffc731;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-weight: bold;
@@ -100,4 +100,52 @@ strong {
 .signature strong {
   color: #fff;
   font-style: normal;
+}
+
+/* 二维码容器样式 */
+.qrcode-container {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin: 30px 0;
+  flex-wrap: wrap;
+}
+
+.qrcode-item {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid #d4af37;
+}
+
+.qrcode-item img {
+  display: block;
+  margin: 0 auto 10px auto;
+  border: 2px solid #d4af37;
+  border-radius: 5px;
+}
+
+.qrcode-item p {
+  color: #d4af37;
+  font-weight: bold;
+  margin: 0;
+  font-size: 14px;
+}
+
+/* 移动设备优化 */
+@media (max-width: 768px) {
+  .qrcode-container {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .qrcode-item {
+    padding: 10px;
+  }
+  
+  .qrcode-item img {
+    width: 300px;
+    height: 300px;
+  }
 }
