@@ -152,6 +152,56 @@ strong {
   .activity-section li {
     font-size: 14px;
   }
+
+  .link-cards {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin: 20px 0;
+  }
+
+  .link-card {
+    padding: 25px 15px;
+  }
+
+  .card-icon {
+    font-size: 40px;
+  }
+
+  .link-card h3 {
+    font-size: 20px;
+  }
+
+  .card-desc {
+    font-size: 13px;
+    min-height: auto;
+  }
+
+  .view-btn {
+    padding: 10px 25px;
+    font-size: 14px;
+  }
+
+  .tips-box {
+    padding: 20px 15px;
+    margin: 30px 0;
+  }
+
+  .tips-box h4 {
+    font-size: 16px;
+  }
+
+  .tips-box li {
+    font-size: 14px;
+  }
+
+  .intro-text {
+    padding: 15px;
+    margin-bottom: 30px;
+  }
+
+  .intro-text p {
+    font-size: 14px;
+  }
 }
 
 .last-sentence em {
@@ -170,6 +220,163 @@ strong {
 .signature strong {
   color: #fff;
   font-style: normal;
+}
+
+/* 介绍文字样式 */
+.intro-text {
+  text-align: center;
+  margin-bottom: 40px;
+  padding: 20px;
+}
+
+.intro-text p {
+  font-size: 16px;
+  color: #ccc;
+  margin: 10px 0;
+}
+
+/* 链接卡片容器 */
+.link-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  margin: 40px 0;
+}
+
+/* 单个链接卡片 */
+.link-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+  border-radius: 15px;
+  padding: 30px 20px;
+  text-align: center;
+  border: 2px solid rgba(212, 175, 55, 0.3);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.link-card:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, #d4af37, #ffd700);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.link-card:hover {
+  transform: translateY(-5px);
+  border-color: #d4af37;
+  box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+}
+
+.link-card:hover:before {
+  transform: scaleX(1);
+}
+
+/* 职业特定颜色 */
+.link-card.warrior:hover {
+  border-color: #ff6b6b;
+}
+
+.link-card.warrior:hover:before {
+  background: linear-gradient(90deg, #ff6b6b, #ff8787);
+}
+
+.link-card.mage:hover {
+  border-color: #4ecdc4;
+}
+
+.link-card.mage:hover:before {
+  background: linear-gradient(90deg, #4ecdc4, #45b7af);
+}
+
+.link-card.warlock:hover {
+  border-color: #b19cd9;
+}
+
+.link-card.warlock:hover:before {
+  background: linear-gradient(90deg, #b19cd9, #9370db);
+}
+
+.card-icon {
+  font-size: 50px;
+  margin-bottom: 15px;
+  filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.5));
+}
+
+.link-card h3 {
+  color: #d4af37;
+  font-size: 24px;
+  margin: 15px 0;
+}
+
+.card-desc {
+  color: #aaa;
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 15px 0 25px 0;
+  min-height: 40px;
+}
+
+.view-btn {
+  display: inline-block;
+  padding: 12px 30px;
+  background: linear-gradient(135deg, #d4af37, #ffd700);
+  color: #000;
+  text-decoration: none;
+  border-radius: 25px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+}
+
+.view-btn:hover {
+  background: linear-gradient(135deg, #ffd700, #ffed4e);
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5);
+}
+
+/* 提示框样式 */
+.tips-box {
+  background: rgba(212, 175, 55, 0.1);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 10px;
+  padding: 25px;
+  margin: 40px 0;
+}
+
+.tips-box h4 {
+  color: #d4af37;
+  font-size: 18px;
+  margin: 0 0 15px 0;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.tips-box ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.tips-box li {
+  padding-left: 25px;
+  position: relative;
+  margin: 10px 0;
+  color: #ccc;
+  line-height: 1.6;
+}
+
+.tips-box li:before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: #d4af37;
+  font-weight: bold;
 }
 
 /* 二维码容器样式 */
