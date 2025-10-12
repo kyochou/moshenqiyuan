@@ -28,11 +28,43 @@
             margin-bottom: 30px;
         }
 
+        .main-content {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 30px;
+            align-items: flex-start;
+        }
+
+        .left-panel {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .right-panel {
+            width: 400px;
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 1024px) {
+            .main-content {
+                flex-direction: column;
+            }
+
+            .right-panel {
+                width: 100%;
+            }
+
+            .promotion-instructions {
+                position: static;
+                margin-top: 20px;
+            }
+        }
+
         .controls {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
         .control-group {
@@ -124,6 +156,72 @@
             border-radius: 4px;
             margin: 10px 0;
         }
+
+        .phone-input {
+            position: relative;
+        }
+
+        .phone-validation {
+            font-size: 12px;
+            margin-top: 5px;
+            height: 16px;
+        }
+
+        .phone-valid {
+            color: #28a745;
+        }
+
+        .phone-invalid {
+            color: #dc3545;
+        }
+
+        input:invalid {
+            border-color: #dc3545;
+        }
+
+        input:valid {
+            border-color: #28a745;
+        }
+
+        .promotion-instructions {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 0;
+            position: sticky;
+            top: 20px;
+        }
+
+        .promotion-instructions h3 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: #333;
+            font-size: 18px;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 8px;
+        }
+
+        .instruction-item {
+            margin-bottom: 12px;
+            padding: 10px 15px;
+            background: white;
+            border-radius: 6px;
+            border-left: 4px solid #007bff;
+            line-height: 1.6;
+            color: #555;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .instruction-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+
+        .instruction-item:last-child {
+            margin-bottom: 0;
+        }
     </style>
 </head>
 <body>
@@ -134,20 +232,37 @@
 
             <div id="status"></div>
 
-            <div class="controls">
-                <div class="control-group">
-                    <label for="phoneInput">请输入您的手机号码(游戏账号):</label>
-                    <input type="text" id="phoneInput" placeholder="输入手机号码">
+            <div class="main-content">
+                <!-- 左侧操作区域 -->
+                <div class="left-panel">
+                    <div class="controls">
+                        <div class="control-group phone-input">
+                            <label for="phoneInput">请输入您的手机号码(游戏账号):</label>
+                            <input type="text" id="phoneInput" placeholder="输入手机号码" maxlength="11" pattern="1[3-9]\d{9}">
+                            <div id="phoneValidation" class="phone-validation"></div>
+                        </div>
+                    </div>
+
+                    <div style="text-align: center;">
+                        <button onclick="addTextToImage()">添加</button>
+                        <button onclick="downloadImage()">下载</button>
+                    </div>
+
+                    <div class="canvas-container">
+                        <canvas id="canvas"></canvas>
+                    </div>
                 </div>
-            </div>
 
-            <div style="text-align: center;">
-                <button onclick="addTextToImage()">添加</button>
-                <button onclick="downloadImage()">下载</button>
-            </div>
-
-            <div class="canvas-container">
-                <canvas id="canvas"></canvas>
+                <!-- 右侧推广说明 -->
+                <div class="right-panel">
+                    <div class="promotion-instructions">
+                        <h3>推广说明</h3>
+                        <div class="instruction-item">输入自己的游戏账户（手机号），点击添加，生成带有您专属推广码的海报</div>
+                        <div class="instruction-item">点击下载，保存海报，将海报分享给朋友或转发至游戏类群聊、论坛、贴吧等</div>
+                        <div class="instruction-item">新玩家登录游戏后，在新手村NPC输入推广码可领取新手礼包</div>
+                        <div class="instruction-item">使用您的推广码进入游戏的玩家账户，将绑定您的推广人身份，玩家越活跃，您获得的奖励越丰厚，具体信息联系客服VX：<strong>moshenqiyuan</strong> <strong>qiyuandamoshen</strong></div>
+                    </div>
+                </div>
             </div>
 
             <div class="url-example" style="display: none;">
@@ -210,6 +325,39 @@
             setTimeout(() => {
                 statusDiv.innerHTML = '';
             }, 3000);
+        }
+
+        // 验证手机号并显示实时反馈
+        function validatePhoneInput() {
+            const phoneInput = document.getElementById('phoneInput');
+            const phoneValidation = document.getElementById('phoneValidation');
+            const phone = phoneInput.value;
+
+            if (!phone) {
+                phoneValidation.textContent = '';
+                phoneValidation.className = 'phone-validation';
+                phoneInput.style.borderColor = '#ddd';
+                return false;
+            }
+
+            if (phone.length < 11) {
+                phoneValidation.textContent = `请输入11位手机号码 (${phone.length}/11)`;
+                phoneValidation.className = 'phone-validation phone-invalid';
+                phoneInput.style.borderColor = '#dc3545';
+                return false;
+            }
+
+            if (!/^1[3-9]\d{9}$/.test(phone)) {
+                phoneValidation.textContent = '手机号格式不正确，请输入正确的手机号';
+                phoneValidation.className = 'phone-validation phone-invalid';
+                phoneInput.style.borderColor = '#dc3545';
+                return false;
+            }
+
+            phoneValidation.textContent = '手机号格式正确';
+            phoneValidation.className = 'phone-validation phone-valid';
+            phoneInput.style.borderColor = '#28a745';
+            return true;
         }
 
         // 更新URL示例
@@ -320,19 +468,35 @@
                 ctx.shadowOffsetX = 0;
                 ctx.shadowOffsetY = 0;
 
-                showStatus('手机号添加成功！', 'success');
+                showStatus('添加成功！', 'success');
                 return Promise.resolve(); // 返回Promise以便链式调用
 
             } catch (error) {
-                console.error('添加手机号失败:', error);
-                showStatus('添加手机号失败: ' + error.message, 'error');
+                console.error('添加失败:', error);
+                showStatus('添加失败: ' + error.message, 'error');
                 return Promise.reject(error);
             }
         }
         // 下载图片
         function downloadImage() {
             if (!currentImage) {
-                showStatus('请先添加手机号到图片', 'error');
+                showStatus('请先添加推广码到图片', 'error');
+                return;
+            }
+
+            // 验证手机号是否已输入
+            const phone = document.getElementById('phoneInput').value;
+            if (!phone) {
+                showStatus('请输入手机号码才能下载图片！', 'error');
+                // 聚焦到手机号输入框
+                document.getElementById('phoneInput').focus();
+                return;
+            }
+
+            // 验证手机号格式
+            if (!/^1[3-9]\d{9}$/.test(phone)) {
+                showStatus('请输入正确的手机号码格式！', 'error');
+                document.getElementById('phoneInput').focus();
                 return;
             }
 
@@ -367,11 +531,18 @@
         
         // 添加事件监听器到表单元素
         function addFormEventListeners() {
-            // 只监听手机号输入框
+            // 监听手机号输入框
             const phoneInput = document.getElementById('phoneInput');
             if (phoneInput) {
-                phoneInput.addEventListener('input', updateUrlExample);
-                phoneInput.addEventListener('change', updateUrlExample);
+                phoneInput.addEventListener('input', function() {
+                    validatePhoneInput();
+                    updateUrlExample();
+                });
+                phoneInput.addEventListener('change', function() {
+                    validatePhoneInput();
+                    updateUrlExample();
+                });
+                phoneInput.addEventListener('blur', validatePhoneInput);
             }
         }
 
