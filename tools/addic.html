@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>魔神起源-推广海报生成</title>
+    <script type="text/javascript" src="../statics/common.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input, select {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        input[type="file"] {
+            border: none;
+            padding: 0;
+        }
+
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        .canvas-container {
+            text-align: center;
+            margin: 20px 0;
+            border: 2px dashed #ddd;
+            padding: 20px;
+            border-radius: 8px;
+            background: #fafafa;
+        }
+
+        canvas {
+            max-width: 100%;
+            height: auto; 
+            border: 1px solid #ddd;
+            background: white;
+        }
+
+        .download-section {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .url-example {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 20px 0;
+            font-family: monospace;
+            font-size: 12px;
+            word-break: break-all;
+        }
+
+        .color-picker {
+            width: 100%;
+            height: 40px;
+        }
+
+        .error {
+            color: #dc3545;
+            background: #f8d7da;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+
+        .success {
+            color: #155724;
+            background: #d4edda;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 完整界面 -->
+        <div id="fullInterface">
+            <h1>魔神起源-专属推广海报生成</h1>
+
+            <div id="status"></div>
+
+            <div class="controls">
+                <div class="control-group">
+                    <label for="phoneInput">请输入您的手机号码(游戏账号):</label>
+                    <input type="text" id="phoneInput" placeholder="输入手机号码">
+                </div>
+            </div>
+
+            <div style="text-align: center;">
+                <button onclick="addTextToImage()">添加</button>
+                <button onclick="downloadImage()">下载</button>
+            </div>
+
+            <div class="canvas-container">
+                <canvas id="canvas"></canvas>
+            </div>
+
+            <div class="url-example" style="display: none;">
+                <strong>当前URL参数示例:</strong><br>
+                <div id="dynamicUrlExample">基本参数: ?text=Hello&fontSize=40&fontColor=ff0000&textX=100&textY=150&fontFamily=Arial&imageUrl=https://example.com/image.jpg</div><br>
+                <strong>自动下载:</strong> 在URL末尾添加 &autoDownload=true 即可自动下载处理后的图片
+            </div>
+        </div>
+
+        <!-- 仅图片界面 -->
+        <div id="imageOnlyInterface" style="display: none;">
+            <canvas id="canvasOnly" style="max-width: 100%; height: auto; display: block; margin: 0 auto;"></canvas>
+        </div>
+    </div>
+
+    <script>
+        let canvas = document.getElementById('canvas');
+        let ctx = canvas.getContext('2d');
+        let currentImage = null;
+
+        // 解析GET参数
+        function getUrlParameters() {
+            const params = {};
+            const urlParams = new URLSearchParams(window.location.search);
+
+            for (const [key, value] of urlParams) {
+                params[key] = value;
+            }
+
+            // 如果有phone参数，应用encodePhone处理
+            if (params.phone) {
+                params.phone = encodePhone(params.phone);
+            }
+
+            // 应用固定参数（用户不可调整）
+            params.fontSize = '28';
+            params.fontColor = '242424';
+            params.fontFamily = 'KaiTi';
+            params.textX = '52';
+            params.textY = '1350';
+            params.imageUrl = 'a1.png';
+
+            return params;
+        }
+
+        // 设置参数到表单
+        function setParametersToForm(params) {
+            if (params.phone) document.getElementById('phoneInput').value = params.phone;
+
+            // 更新示例URL
+            updateUrlExample();
+        }
+
+        // 显示状态消息
+        function showStatus(message, type = 'info') {
+            const statusDiv = document.getElementById('status');
+            statusDiv.innerHTML = `<div class="${type}">${message}</div>`;
+
+            // 3秒后自动清除消息
+            setTimeout(() => {
+                statusDiv.innerHTML = '';
+            }, 3000);
+        }
+
+        // 更新URL示例
+        function updateUrlExample() {
+            const phone = document.getElementById('phoneInput').value || '13800138000';
+
+            // 固定参数
+            const fixedParams = {
+                fontSize: '28',
+                fontColor: '242424',
+                fontFamily: 'KaiTi',
+                textX: '52',
+                textY: '1350',
+                imageUrl: 'a1.png'
+            };
+
+            const params = new URLSearchParams();
+            if (phone) params.set('phone', phone);
+
+            // 添加固定参数
+            Object.entries(fixedParams).forEach(([key, value]) => {
+                params.set(key, value);
+            });
+
+            const exampleUrl = `?${params.toString()}`;
+            document.getElementById('dynamicUrlExample').textContent = exampleUrl;
+        }
+
+        // 加载图片
+        function loadImage(src) {
+            return new Promise((resolve, reject) => {
+                const img = new Image();
+
+                // 处理跨域图片
+                img.crossOrigin = 'anonymous';
+
+                img.onload = function() {
+                    currentImage = img;
+
+                    // 设置画布大小
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+
+                    // 绘制图片
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    ctx.drawImage(img, 0, 0);
+
+                    resolve(img);
+                };
+
+                img.onerror = function(error) {
+                    showStatus('图片加载失败，请检查图片URL或文件', 'error');
+                    reject(error);
+                };
+
+                img.src = src;
+            });
+        }
+
+        // 添加文字到图片（使用固定参数）
+        async function addTextToImage() {
+            try {
+                const phone = document.getElementById('phoneInput').value;
+
+                if (!phone) {
+                    showStatus('请输入手机号码', 'error');
+                    return;
+                }
+
+                // 使用固定图片URL
+                const imageSrc = '../statics/activities/a1.png';
+
+                // 加载图片
+                await loadImage(imageSrc);
+
+                if (!currentImage) {
+                    showStatus('图片加载失败', 'error');
+                    return;
+                }
+
+                // 使用固定参数
+                const fontSize = '28';
+                const fontColor = '#242424';
+                const fontFamily = 'KaiTi';
+                const textX = 52;
+                const textY = 1350;
+
+                // 使用encodePhone处理手机号
+                const encodedPhone = encodePhone(phone);
+
+                // 设置文字样式
+                ctx.font = `${fontSize}px ${fontFamily}`;
+                ctx.fillStyle = fontColor;
+                ctx.textBaseline = 'top';
+
+                // 添加文字阴影效果
+                ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
+                ctx.shadowBlur = 2;
+                ctx.shadowOffsetX = 1;
+                ctx.shadowOffsetY = 1;
+
+                // 绘制文字
+                ctx.fillText(encodedPhone, textX, textY);
+
+                // 重置阴影
+                ctx.shadowColor = 'transparent';
+                ctx.shadowBlur = 0;
+                ctx.shadowOffsetX = 0;
+                ctx.shadowOffsetY = 0;
+
+                showStatus('手机号添加成功！', 'success');
+                return Promise.resolve(); // 返回Promise以便链式调用
+
+            } catch (error) {
+                console.error('添加手机号失败:', error);
+                showStatus('添加手机号失败: ' + error.message, 'error');
+                return Promise.reject(error);
+            }
+        }
+        // 下载图片
+        function downloadImage() {
+            if (!currentImage) {
+                showStatus('请先添加手机号到图片', 'error');
+                return;
+            }
+
+            canvas.toBlob(function(blob) {
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+
+                // 获取手机号内容并进行编码处理作为文件名
+                const phone = document.getElementById('phoneInput').value;
+                const encodedPhone = phone ? encodePhone(phone) : null;
+                let filename = encodedPhone ? `${encodedPhone}.png` : 'image-with-phone.png';
+
+                // 清理文件名，移除不安全的字符
+                filename = filename.replace(/[<>:"/\\|?*]/g, '').replace(/\s+/g, '_');
+
+                // 如果文件名为空或只有特殊字符，使用默认名称
+                if (filename === '.png' || filename.length === 0) {
+                    filename = 'image-with-phone.png';
+                }
+
+                a.download = filename;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+
+                showStatus('图片下载成功！', 'success');
+            }, 'image/png');
+        }
+
+        
+        // 添加事件监听器到表单元素
+        function addFormEventListeners() {
+            // 只监听手机号输入框
+            const phoneInput = document.getElementById('phoneInput');
+            if (phoneInput) {
+                phoneInput.addEventListener('input', updateUrlExample);
+                phoneInput.addEventListener('change', updateUrlExample);
+            }
+        }
+
+        // 页面加载时处理URL参数
+        window.addEventListener('load', function() {
+            const params = getUrlParameters();
+
+            if (Object.keys(params).length > 0) {
+                setParametersToForm(params);
+
+                // 自动加载固定图片
+                setTimeout(() => {
+                    loadImage('../statics/activities/a1.png');
+                }, 500);
+
+                // 如果有手机号，自动添加
+                if (params.phone) {
+                    setTimeout(() => {
+                        addTextToImage().then(() => {
+                            // 如果设置了自动下载参数，则自动下载
+                            if (params.autoDownload === 'true' || params.autoDownload === '1') {
+                                setTimeout(() => {
+                                    downloadImage();
+                                    showStatus('正在自动下载...', 'success');
+                                }, 500);
+                            }
+                        });
+                    }, 1500);
+                }
+            }
+
+            // 设置默认画布大小
+            canvas.width = 800;
+            canvas.height = 600;
+
+            // 添加表单事件监听器
+            addFormEventListeners();
+
+            // 初始化示例URL
+            updateUrlExample();
+        });
+
+        // 支持拖拽上传图片
+        canvas.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            canvas.style.opacity = '0.7';
+        });
+
+        canvas.addEventListener('dragleave', function(e) {
+            e.preventDefault();
+            canvas.style.opacity = '1';
+        });
+
+        canvas.addEventListener('drop', function(e) {
+            e.preventDefault();
+            canvas.style.opacity = '1';
+
+            const files = e.dataTransfer.files;
+            if (files.length > 0 && files[0].type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    loadImage(e.target.result);
+                };
+                reader.readAsDataURL(files[0]);
+            }
+        });
+    </script>
+</body>
+</html>
