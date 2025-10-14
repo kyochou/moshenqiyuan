@@ -44,6 +44,11 @@
         }
     }
   </script-->
+  <style>
+    a strong {
+      color: #ac8946;
+    }
+  </style>
   </head>
 
   <body>
@@ -262,6 +267,11 @@
           </div>
           <div class="bd">
             <ul>
+              <li>
+                <a href="content/download.html" target="_blank"
+                  >《魔神起源》<strong>10月18日</strong> 正式开启不删档公测</a
+                ><span>10-14</span>
+              </li>
                <li>
                 <a href="content/neice2.html" target="_blank"
                   >《魔神起源》内测活动二</a
@@ -433,82 +443,150 @@
             <b>适龄提示：</b
             >本游戏适合16岁以上的成年人进入，请您确定已如实进行实名认证，为了您的健康，请合理控制游戏时间，适度娱乐，理性消费。
           </p>
+          <p class="tips">
+            <b>联系我们：</b
+            >抖音1：32066736191
+            抖音2：20987238709
+            微信1：moshenqiyuan
+            微信2：qiyuandamoshen
+          </p>
         </div>
       </div>
     </div>
     <!-- 底部版权end -->
 
-    <!-- 右侧浮动 -->
-    <div id="right_max" class="fixedbox wow fadeInRight">
-      <div class="h5close">
-        <a class="h5btn" onclick="rm_hidden()"
-          >隐<br />藏<br /><img src="pc/images/btn_close.png"
-        /></a>
-      </div>
-      <div class="h5bar">
-        <div class="rightlogo">
-          <a href="#" target="_blank"
-            ><img src="pc/images/logo.png" alt=""
-          /></a>
-        </div>
-        <!--
-        <div class="qq">
-          <div>
-            <p>QQ客服A</p>
-            <a href="#" target="_blank"
-              ><img src="pc/images/fixed-qq1.png" alt=""
-            /></a>
-          </div>
-          <div>
-            <p>QQ客服B</p>
-            <a href="#" target="_blank"
-              ><img src="pc/images/fixed-qq1.png" alt=""
-            /></a>
-          </div>
-        </div>
-        <div class="group">
-          <p>玩家交流群1</p>
-          <a href="#" target="_blank"
-            ><img src="pc/images/fixed-qq2.png" alt=""
-          /></a>
-        </div>
-        <div class="group">
-          <p>玩家交流群2</p>
-          <a href="#" target="_blank"
-            ><img src="pc/images/fixed-qq2.png" alt=""
-          /></a>
-        </div>
-        <div class="kefutime">客服时间：09:00-22:00</div>
-        <div class="chongzhi">
-          <a href="#" target="_blank"
-            ><img src="pc/images/fixed-chongzhi.png"
-          /></a>
-        </div>
-        -->
-        <div class="code">
-          <p>抖音扫一扫 关注我们</p>
-          <div onmouseover="displayFloatQR()" onmouseout="hideFloatQR()">
-            <img src="pc/images/code.png" alt="" />
-            <div id="boxFloatQR">
-              <img src="pc/images/code.png" alt="抖音二维码" />
+    <!-- 右侧浮动联系方式 -->
+    <div id="float_contact">
+        <!-- 展开状态 -->
+        <div id="right_max" class="fixedbox wow fadeInRight">
+            <div class="h5close">
+                <a class="h5btn" onclick="rm_hidden()">
+                    隐<br />藏<br />
+                    <img src="pc/images/btn_close.png" />
+                </a>
             </div>
-          </div>
+            <div class="h5bar">
+                <!-- Logo -->
+                <div class="rightlogo">
+                    <a href="#" target="_blank">
+                        <img src="pc/images/logo.png" alt="" />
+                    </a>
+                </div>
+
+                <!-- 联系方式列表 -->
+                <div class="contact-list">
+                    <!-- 抖音号 -->
+                    <div class="contact-item" data-type="douyin" data-account="32066736191">
+                        <div class="contact-info">
+                            <div class="contact-label">
+                                <i class="icon-douyin">抖</i>
+                                抖音1
+                            </div>
+                            <div class="contact-value">32066736191</div>
+                        </div>
+                        <div class="contact-actions">
+                            <button class="btn-copy" onclick="copyToClipboard('32066736191')" title="复制">
+                                <span>复制</span>
+                            </button>
+                            <div class="qr-trigger" onmouseenter="showQR('douyin')" onmouseleave="hideQR('douyin')">
+                                <img class="qr-trigger-img" src="pc/images/code.png" alt="二维码" title="显示二维码" />
+                                <div class="qr-popup" id="qr-douyin">
+                                    <img src="pc/images/code.png" alt="抖音二维码" />
+                                    <div class="qr-account">32066736191</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+<!-- 抖音号2 -->
+                    <div class="contact-item" data-type="douyin" data-account="20987238709">
+                        <div class="contact-info">
+                            <div class="contact-label">
+                                <i class="icon-douyin">抖</i>
+                                抖音2
+                            </div>
+                            <div class="contact-value">20987238709</div>
+                        </div>
+                        <div class="contact-actions">
+                            <button class="btn-copy" onclick="copyToClipboard('20987238709')" title="复制">
+                                <span>复制</span>
+                            </button>
+                            <div class="qr-trigger" onmouseenter="showQR('douyin2')" onmouseleave="hideQR('douyin2')">
+                                <img class="qr-trigger-img" src="pc/images/code_msqy.png" alt="二维码" title="显示二维码" />
+                                <div class="qr-popup" id="qr-douyin2">
+                                    <img src="pc/images/code_msqy.png" alt="抖音二维码" />
+                                    <div class="qr-account">20987238709</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 微信1 -->
+                    <div class="contact-item" data-type="wechat1" data-account="moshenqiyuan">
+                        <div class="contact-info">
+                            <div class="contact-label">
+                                <i class="icon-wechat">微</i>
+                                微信1
+                            </div>
+                            <div class="contact-value">moshenqiyuan</div>
+                        </div>
+                        <div class="contact-actions">
+                            <button class="btn-copy" onclick="copyToClipboard('moshenqiyuan')" title="复制">
+                                <span>复制</span>
+                            </button>
+                            <div class="qr-trigger" onmouseenter="showQR('wechat1')" onmouseleave="hideQR('wechat1')">
+                                <img class="qr-trigger-img" src="statics/vx-moshenqiyuan.jpg" alt="二维码" title="显示二维码" />
+                                <div class="qr-popup" id="qr-wechat1">
+                                    <img src="statics/vx-moshenqiyuan.jpg" alt="微信二维码" />
+                                    <div class="qr-account">moshenqiyuan</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 微信2 -->
+                    <div class="contact-item" data-type="wechat2" data-account="qiyuandamoshen">
+                        <div class="contact-info">
+                            <div class="contact-label">
+                                <i class="icon-wechat">微</i>
+                                微信2
+                            </div>
+                            <div class="contact-value">qiyuandamoshen</div>
+                        </div>
+                        <div class="contact-actions">
+                            <button class="btn-copy" onclick="copyToClipboard('qiyuandamoshen')" title="复制">
+                                <span>复制</span>
+                            </button>
+                            <div class="qr-trigger" onmouseenter="showQR('wechat2')" onmouseleave="hideQR('wechat2')">
+                                <img class="qr-trigger-img"  src="statics/vx-qiyuandms.png" alt="二维码" title="显示二维码" />
+                                <div class="qr-popup" id="qr-wechat2">
+                                    <img src="statics/vx-qiyuandms.png" alt="微信二维码" />
+                                    <div class="qr-account">qiyuandamoshen</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 客服时间 -->
+                <div class="service-time">
+                    客服时间：07:00-22:00
+                </div>
+
+                <!-- 返回顶部 -->
+                <div class="top">
+                    <a href="javascript:void(0)" onclick="scrollToTop()" title="返回顶部">
+                        <img src="pc/images/backtop.png" alt="" />
+                    </a>
+                </div>
+            </div>
         </div>
-        <div class="top">
-          <a
-            href="javascript:void(0)"
-            onClick="$('html,body').animate({scrollTop: '0px'}, 500);return false;window.scrollTo(0,0);return false;"
-            target="_blank"
-            title="返回顶部"
-            ><img src="pc/images/backtop.png" alt=""
-          /></a>
+
+        <!-- 折叠状态 -->
+        <div id="right_min" class="h5open" style="display: none">
+            <a class="h5btn" onclick="rm_show()">
+                联<br />系<br />我<br />们
+                <img src="pc/images/btn_open.png" />
+            </a>
         </div>
-      </div>
-    </div>
-    <div id="right_min" class="h5open" style="display: none">
-      <a class="h5btn" onclick="rm_show()"
-        >下<br />载<br />安<br />装<img src="pc/images/btn_open.png"
-      /></a>
     </div>
     <script type="text/javascript">
       function rm_show() {
@@ -520,27 +598,139 @@
         document.getElementById("right_min").style.display = "";
       }
 
-      // 浮动二维码相关函数
-      var floatQRTimer;
-      var isFloatQRVisible = false;
+      // 新的联系方式相关函数
+      var qrTimers = {};
 
-      function displayFloatQR() {
-        clearTimeout(floatQRTimer);
-        document.getElementById("boxFloatQR").style.display = "block";
-        isFloatQRVisible = true;
+      // 显示二维码
+      function showQR(type) {
+        const qrId = 'qr-' + type;
+        clearTimeout(qrTimers[type]);
+        document.getElementById(qrId).style.display = 'block';
       }
 
-      function keepFloatQR() {
-        clearTimeout(floatQRTimer);
-        document.getElementById("boxFloatQR").style.display = "block";
-      }
-
-      function hideFloatQR() {
-        floatQRTimer = setTimeout(function () {
-          document.getElementById("boxFloatQR").style.display = "none";
-          isFloatQRVisible = false;
+      // 隐藏二维码
+      function hideQR(type) {
+        const qrId = 'qr-' + type;
+        qrTimers[type] = setTimeout(function () {
+          document.getElementById(qrId).style.display = 'none';
         }, 200);
       }
+
+      // 复制到剪贴板
+      function copyToClipboard(text) {
+        if (navigator.clipboard && window.isSecureContext) {
+          // 现代浏览器
+          navigator.clipboard.writeText(text).then(function() {
+            showMessage('已复制到剪贴板', 'success');
+          }).catch(function(err) {
+            fallbackCopy(text);
+          });
+        } else {
+          // 兼容旧浏览器
+          fallbackCopy(text);
+        }
+      }
+
+      // 兼容性复制方法
+      function fallbackCopy(text) {
+        const textArea = document.createElement('textarea');
+        textArea.value = text;
+        textArea.style.position = 'fixed';
+        textArea.style.left = '-999999px';
+        textArea.style.top = '-999999px';
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+
+        try {
+          document.execCommand('copy');
+          showMessage('已复制到剪贴板', 'success');
+        } catch (err) {
+          showMessage('复制失败，请手动复制', 'error');
+        }
+
+        document.body.removeChild(textArea);
+      }
+
+      // 显示消息提示
+      function showMessage(message, type) {
+        // 创建消息元素
+        const messageEl = document.createElement('div');
+        messageEl.className = 'copy-message ' + type;
+        messageEl.textContent = message;
+        messageEl.style.cssText = `
+          position: fixed;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          background: ${type === 'success' ? '#28a745' : '#dc3545'};
+          color: white;
+          padding: 10px 20px;
+          border-radius: 6px;
+          font-size: 14px;
+          font-weight: bold;
+          z-index: 10000;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+          animation: fadeInOut 2s ease-in-out;
+        `;
+
+        // 添加动画样式
+        if (!document.getElementById('copy-message-style')) {
+          const style = document.createElement('style');
+          style.id = 'copy-message-style';
+          style.textContent = `
+            @keyframes fadeInOut {
+              0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+              20% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+              80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+              100% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+            }
+          `;
+          document.head.appendChild(style);
+        }
+
+        document.body.appendChild(messageEl);
+
+        // 2秒后移除
+        setTimeout(function() {
+          if (messageEl.parentNode) {
+            messageEl.parentNode.removeChild(messageEl);
+          }
+        }, 2000);
+      }
+
+      // 返回顶部
+      function scrollToTop() {
+        if (window.scrollTo) {
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        } else {
+          // 兼容旧浏览器
+          document.documentElement.scrollTop = 0;
+          document.body.scrollTop = 0;
+        }
+      }
+
+      // 页面加载完成后为二维码添加事件监听器
+      document.addEventListener('DOMContentLoaded', function() {
+        const qrPopups = document.querySelectorAll('.qr-popup');
+        qrPopups.forEach(popup => {
+          popup.addEventListener('mouseenter', function() {
+            const type = this.id.replace('qr-', '');
+            clearTimeout(qrTimers[type]);
+            this.style.display = 'block';
+          });
+
+          popup.addEventListener('mouseleave', function() {
+            const type = this.id.replace('qr-', '');
+            qrTimers[type] = setTimeout(() => {
+              this.style.display = 'none';
+            }, 200);
+          });
+        });
+      });
     </script>
     <!-- 右侧浮动end -->
 

@@ -15,6 +15,7 @@
     <link rel="stylesheet" type="text/css" href="../pc/css/animate.css" />
     <link rel="stylesheet" type="text/css" href="../pc/css/content.css" />
     <script type="text/javascript" src="../pc/js/jquery.min.js"></script>
+  <script type="text/javascript" src="../js/load_float_contact.js"></script>
   </head>
   <body>
     <div class="news-container">
@@ -39,22 +40,57 @@
               <a target="_blank" href="https://docs.qq.com/doc/p/595f1276a1422069cbbbeafe6d5b4fa19bbc1d25" >苹果端安装教程</a>
             </div>
           </div>
-        
-        <p><strong>关注我们获取最新信息：</strong></p>
-        <div class="qrcode-container" style="display: flex; justify-content: space-between; align-items: center; gap: 40px;">
-          <div class="qrcode-item" style="flex: 1; text-align: center;">
-            <img src="../pc/images/code.png" alt="抖音账号二维码-起源大魔神" width="384" height="346" style="max-width: 100%; height: auto;">
-            <p>抖音账号二维码-起源大魔神</p>
-          </div>
-          <div class="qrcode-item" style="flex: 1; text-align: center;">
-            <img src="../pc/images/code_msqy.png" alt="抖音账号二维码-魔神起源" width="384" height="346" style="max-width: 100%; height: auto;">
-            <p>抖音账号二维码-魔神起源</p>
-          </div>
+
+
+        <div style="text-align: center; margin: 30px 0;">
+            <a href="../tools/addic.html" target="_blank"
+               style="display: inline-block;
+                      padding: 15px 40px;
+                      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                      color: white;
+                      text-decoration: none;
+                      border-radius: 50px;
+                      font-weight: bold;
+                      font-size: 18px;
+                      box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+                      transition: all 0.3s ease;
+                      text-transform: uppercase;
+                      letter-spacing: 1px;
+                      position: relative;
+                      overflow: hidden;">
+                <span style="position: relative; z-index: 2;">🎁 点击生成专属推广码 🎁</span>
+                <div style="position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); transition: left 0.5s;"
+                     onmouseover="this.parentElement.style.left='100%'"
+                     onmouseout="this.parentElement.style.left='-100%'"></div>
+            </a>
         </div>
-
-
+        <style>
+        .promo-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.4);
+        }
+        </style>
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const promoLink = document.querySelector('a[href="../tools/addic.html"]');
+            if (promoLink) {
+                promoLink.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-3px) scale(1.05)';
+                });
+                promoLink.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            }
+        });
+        </script>
+        
+        
+        
+        <p><strong>关注我们的最新活动：</strong></p>
+        
+ 
         <p style="margin-top: 40px; margin-bottom: 40px;">
-          <img src="../pc/images/msqy-1003.png" alt="内测活动" width="100%" height="auto">
+          <img src="../statics/activities/a1.png" alt="最新活动" width="100%" height="auto">
         </p>
         
         
