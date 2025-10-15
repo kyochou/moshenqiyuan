@@ -329,6 +329,76 @@
             opacity: 1;
             visibility: visible;
         }
+
+        /* 推广码显示区域样式 */
+        .promotion-code-section {
+            background: rgba(31, 24, 11, 0.8);
+            border: 1px solid #ac8946;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .promotion-code-label {
+            font-size: 16px;
+            font-weight: bold;
+            color: #ac8946;
+            margin-bottom: 15px;
+        }
+
+        .promotion-code-display {
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid #28a745;
+            border-radius: 6px;
+            padding: 15px 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 24px;
+            font-weight: bold;
+            color: #28a745;
+            letter-spacing: 3px;
+            margin: 15px 0;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .promotion-code-display:hover {
+            border-color: #d7b591;
+            color: #d7b591;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+
+        .copy-button {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .copy-button:hover {
+            background: #218838;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .copy-button:active {
+            transform: translateY(0);
+        }
+
+        .promotion-code-tips {
+            font-size: 12px;
+            color: #d7b591;
+            margin-top: 10px;
+            opacity: 0.8;
+        }
     </style>
 </head>
 <body>
@@ -359,6 +429,14 @@
                     <div style="text-align: center;">
                         <button onclick="addTextToImage()">添加</button>
                         <button onclick="downloadImage()">下载</button>
+                    </div>
+
+                    <!-- 推广码显示区域 -->
+                    <div id="promotionCodeSection" class="promotion-code-section" style="display: none;">
+                        <div class="promotion-code-label">您的专属推广码</div>
+                        <div id="promotionCodeDisplay" class="promotion-code-display" onclick="selectCode()" title="点击选择推广码"></div>
+                        <button class="copy-button" onclick="manualCopyCode()">📋 复制推广码</button>
+                        <div class="promotion-code-tips">点击复制按钮或使用 Ctrl+C 复制推广码</div>
                     </div>
 
                     <div class="canvas-container">
@@ -504,6 +582,9 @@
 
             const exampleUrl = `?${params.toString()}`;
             document.getElementById('dynamicUrlExample').textContent = exampleUrl;
+
+            // 初始化时隐藏推广码显示区域
+            displayPromotionCode('');
         }
 
         // 加载图片
@@ -588,10 +669,10 @@
                 ctx.shadowOffsetX = 0;
                 ctx.shadowOffsetY = 0;
 
-                        // 复制推广码到剪贴板
-                copyPromotionCode(encodedPhone);
+                        // 显示推广码在界面上
+                displayPromotionCode(encodedPhone);
 
-                showStatus('添加成功！推广码已复制到剪贴板: ' + encodedPhone, 'success');
+                showStatus('添加成功！推广码: ' + encodedPhone, 'success');
                 return Promise.resolve(); // 返回Promise以便链式调用
 
             } catch (error) {
@@ -702,6 +783,82 @@
 
             document.body.removeChild(textArea);
         }
+
+        // 显示推广码在界面上
+        function displayPromotionCode(promotionCode) {
+            const section = document.getElementById('promotionCodeSection');
+            const display = document.getElementById('promotionCodeDisplay');
+
+            if (promotionCode) {
+                display.textContent = promotionCode;
+                section.style.display = 'block';
+
+                // 添加动画效果
+                display.style.animation = 'pulse 0.5s ease-in-out';
+                setTimeout(() => {
+                    display.style.animation = '';
+                }, 500);
+            } else {
+                section.style.display = 'none';
+                display.textContent = '';
+            }
+        }
+
+        // 选择推广码文本
+        function selectCode() {
+            const display = document.getElementById('promotionCodeDisplay');
+            const promotionCode = display.textContent;
+
+            if (!promotionCode) {
+                return;
+            }
+
+            // 创建选择范围
+            const range = document.createRange();
+            range.selectNodeContents(display);
+
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+
+            // 添加视觉反馈
+            display.style.backgroundColor = 'rgba(40, 167, 69, 0.2)';
+            setTimeout(() => {
+                display.style.backgroundColor = '';
+            }, 200);
+        }
+
+        // 手动复制推广码
+        function manualCopyCode() {
+            const display = document.getElementById('promotionCodeDisplay');
+            const promotionCode = display.textContent;
+
+            if (!promotionCode) {
+                showStatus('请先生成推广码', 'error');
+                return;
+            }
+
+            copyPromotionCode(promotionCode);
+            showStatus('推广码已复制: ' + promotionCode, 'success');
+
+            // 添加按钮动画反馈
+            const button = event.target;
+            button.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                button.style.transform = '';
+            }, 100);
+        }
+
+        // 添加CSS动画
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes pulse {
+                0% { transform: scale(1); }
+                50% { transform: scale(1.05); }
+                100% { transform: scale(1); }
+            }
+        `;
+        document.head.appendChild(style);
 
         // 添加事件监听器到表单元素
         function addFormEventListeners() {
