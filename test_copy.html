@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>测试复制功能</title>
+    <script src="statics/common.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .test-area { margin: 20px 0; }
+        input { padding: 10px; margin: 10px 0; }
+        button { padding: 10px 20px; margin: 5px; cursor: pointer; }
+        .status { padding: 10px; margin: 10px 0; border-radius: 4px; }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+    </style>
+</head>
+<body>
+    <h1>推广码复制功能测试</h1>
+
+    <div class="test-area">
+        <label>输入手机号码:</label>
+        <input type="text" id="phoneInput" placeholder="输入11位手机号" maxlength="11">
+        <br>
+        <button onclick="testCopyCode()">测试复制推广码</button>
+        <button onclick="pasteTest()">粘贴测试</button>
+        <div id="status"></div>
+    </div>
+
+    <div class="test-area">
+        <h3>测试剪贴板内容:</h3>
+        <textarea id="clipboardTest" placeholder="粘贴内容到这里测试" style="width: 300px; height: 100px;"></textarea>
+        <br>
+        <button onclick="clearClipboardTest()">清空</button>
+    </div>
+
+    <script>
+        function showStatus(message, type = 'info') {
+            const statusDiv = document.getElementById('status');
+            statusDiv.innerHTML = `<div class="${type}">${message}</div>`;
+            setTimeout(() => {
+                statusDiv.innerHTML = '';
+            }, 3000);
+        }
+
+        function testCopyCode() {
+            const phone = document.getElementById('phoneInput').value;
+
+            if (!phone) {
+                showStatus('请输入手机号码', 'error');
+                return;
+            }
+
+            if (!/^1[3-9]\d{9}$/.test(phone)) {
+                showStatus('请输入正确的手机号码格式', 'error');
+                return;
+            }
+
+            try {
+                const encodedPhone = encodePhone(phone);
+                copyPromotionCode(encodedPhone);
+                showStatus(`推广码 ${encodedPhone} 已复制到剪贴板`, 'success');
+            } catch (error) {
+                showStatus('复制失败: ' + error.message, 'error');
+            }
+        }
+
+        function pasteTest() {
+            navigator.clipboard.readText().then(text => {
+                document.getElementById('clipboardTest').value = text;
+                showStatus('剪贴板内容已粘贴', 'success');
+            }).catch(err => {
+                showStatus('无法读取剪贴板: ' + err.message, 'error');
+            });
+        }
+
+        function clearClipboardTest() {
+            document.getElementById('clipboardTest').value = '';
+            showStatus('已清空', 'success');
+        }
+
+        // 复制推广码到剪贴板
+        function copyPromotionCode(promotionCode) {
+            if (!promotionCode) {
+                console.warn('推广码为空，无法复制');
+                return;
+            }
+
+            // 使用现代浏览器的 Clipboard API
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(promotionCode).then(function() {
+                    console.log('推广码复制成功:', promotionCode);
+                }).catch(function(err) {
+                    console.error('复制失败，使用备用方法:', err);
+                    fallbackCopyTextToClipboard(promotionCode);
+                });
+            } else {
+                // 备用方法，兼容旧浏览器
+                fallbackCopyTextToClipboard(promotionCode);
+            }
+        }
+
+        // 备用复制方法
+        function fallbackCopyTextToClipboard(text) {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+
+            // 设置样式使其不可见
+            textArea.style.position = 'fixed';
+            textArea.style.left = '-999999px';
+            textArea.style.top = '-999999px';
+            textArea.style.opacity = '0';
+            textArea.style.pointerEvents = 'none';
+
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    console.log('推广码复制成功 (备用方法):', text);
+                } else {
+                    console.error('复制失败 (备用方法)');
+                }
+            } catch (err) {
+                console.error('复制错误:', err);
+            }
+
+            document.body.removeChild(textArea);
+        }
+    </script>
+</body>
+</html>

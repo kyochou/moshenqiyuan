@@ -588,7 +588,10 @@
                 ctx.shadowOffsetX = 0;
                 ctx.shadowOffsetY = 0;
 
-                showStatus('添加成功！', 'success');
+                        // 复制推广码到剪贴板
+                copyPromotionCode(encodedPhone);
+
+                showStatus('添加成功！推广码已复制到剪贴板: ' + encodedPhone, 'success');
                 return Promise.resolve(); // 返回Promise以便链式调用
 
             } catch (error) {
@@ -648,7 +651,58 @@
             }, 'image/png');
         }
 
-        
+        // 复制推广码到剪贴板
+        function copyPromotionCode(promotionCode) {
+            if (!promotionCode) {
+                console.warn('推广码为空，无法复制');
+                return;
+            }
+
+            // 使用现代浏览器的 Clipboard API
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(promotionCode).then(function() {
+                    console.log('推广码复制成功:', promotionCode);
+                }).catch(function(err) {
+                    console.error('复制失败，使用备用方法:', err);
+                    fallbackCopyTextToClipboard(promotionCode);
+                });
+            } else {
+                // 备用方法，兼容旧浏览器
+                fallbackCopyTextToClipboard(promotionCode);
+            }
+        }
+
+        // 备用复制方法
+        function fallbackCopyTextToClipboard(text) {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+
+            // 设置样式使其不可见
+            textArea.style.position = 'fixed';
+            textArea.style.left = '-999999px';
+            textArea.style.top = '-999999px';
+            textArea.style.opacity = '0';
+            textArea.style.pointerEvents = 'none';
+
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    console.log('推广码复制成功 (备用方法):', text);
+                } else {
+                    console.error('复制失败 (备用方法)');
+                }
+            } catch (err) {
+                console.error('复制错误:', err);
+                // 可以在这里显示用户友好的错误信息
+            }
+
+            document.body.removeChild(textArea);
+        }
+
         // 添加事件监听器到表单元素
         function addFormEventListeners() {
             // 监听手机号输入框
