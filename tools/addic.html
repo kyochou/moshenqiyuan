@@ -416,10 +416,6 @@
                 params[key] = value;
             }
 
-            // 如果有phone参数，应用encodePhone处理
-            if (params.phone) {
-                params.phone = encodePhone(params.phone);
-            }
 
             // 应用固定参数（用户不可调整）
             params.fontSize = '28';
