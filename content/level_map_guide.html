@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="user-scalable=yes" />
+    <meta name="keywords" content="起源大魔神,魔神起源,等级开放,地图开放,游戏进度,魔神大陆,新手指南" />
+    <meta
+      name="description"
+      content="魔神起源等级与地图开放时间表 - 了解游戏不同阶段的等级上限和地图开放安排"
+    />
+    <title>魔神起源 - 等级与地图开放指南</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="../pc/css/swiper-bundle.min.css"
+    />
+    <link rel="stylesheet" type="text/css" href="../pc/css/dms005.css" />
+    <link rel="stylesheet" type="text/css" href="../pc/css/animate.css" />
+    <link rel="stylesheet" type="text/css" href="../pc/css/content.css" />
+    <script type="text/javascript" src="../pc/js/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/load_float_contact.js"></script>
+    <style>
+      .timeline-container {
+        position: relative;
+        padding: 20px 0;
+        margin: 30px 0;
+      }
+
+      .timeline-line {
+        position: absolute;
+        left: 50%;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: linear-gradient(to bottom, #d4af37, rgba(212, 175, 55, 0.3));
+        transform: translateX(-50%);
+      }
+
+      .timeline-item {
+        position: relative;
+        margin: 30px 0;
+        display: flex;
+        align-items: center;
+      }
+
+      .timeline-item:nth-child(odd) {
+        flex-direction: row;
+      }
+
+      .timeline-item:nth-child(even) {
+        flex-direction: row-reverse;
+      }
+
+      .timeline-content {
+        flex: 1;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(212, 175, 55, 0.3);
+        border-radius: 10px;
+        padding: 25px;
+        margin: 0 20px;
+        transition: all 0.3s ease;
+      }
+
+      .timeline-content:hover {
+        background: rgba(255, 255, 255, 0.12);
+        border-color: #d4af37;
+        box-shadow: 0 5px 15px rgba(212, 175, 55, 0.2);
+        transform: scale(1.02);
+      }
+
+      .timeline-point {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 20px;
+        height: 20px;
+        background: #d4af37;
+        border: 3px solid rgba(255, 255, 255, 0.9);
+        border-radius: 50%;
+        box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.3);
+        z-index: 1;
+      }
+
+      .phase-number {
+        background: linear-gradient(135deg, #d4af37, #ffd700);
+        color: #000;
+        font-weight: bold;
+        padding: 8px 16px;
+        border-radius: 20px;
+        display: inline-block;
+        margin-bottom: 15px;
+        font-size: 14px;
+      }
+
+      .timeline-title {
+        color: #d4af37;
+        font-size: 22px;
+        font-weight: bold;
+        margin-bottom: 15px;
+      }
+
+      .level-badge {
+        background: #28a745;
+        color: #fff;
+        padding: 5px 12px;
+        border-radius: 15px;
+        font-size: 14px;
+        font-weight: bold;
+        margin-right: 8px;
+        display: inline-block;
+      }
+
+      .map-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 10px;
+        margin-top: 15px;
+      }
+
+      .map-item {
+        background: rgba(212, 175, 55, 0.1);
+        border: 1px solid rgba(212, 175, 55, 0.3);
+        border-radius: 6px;
+        padding: 15px 10px;
+        text-align: center;
+        transition: all 0.3s ease;
+        min-height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .map-item:hover {
+        background: rgba(212, 175, 55, 0.2);
+        transform: translateY(-2px);
+      }
+
+      .map-name {
+        color: #fff;
+        font-weight: bold;
+        font-size: 13px;
+        margin: 0;
+      }
+
+      .future-section {
+        background: rgba(138, 43, 226, 0.1);
+        border: 2px solid rgba(138, 43, 226, 0.3);
+        border-radius: 10px;
+        padding: 25px;
+        margin: 30px 0;
+        text-align: center;
+      }
+
+      .future-title {
+        color: #b19cd9;
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+      }
+
+      .future-maps {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        justify-content: center;
+        margin-top: 20px;
+      }
+
+      .future-map-item {
+        background: rgba(138, 43, 226, 0.15);
+        border: 1px solid rgba(138, 43, 226, 0.4);
+        border-radius: 8px;
+        padding: 12px 20px;
+        color: #e6d5ff;
+        font-weight: bold;
+        transition: all 0.3s ease;
+      }
+
+      .future-map-item:hover {
+        background: rgba(138, 43, 226, 0.25);
+        transform: scale(1.05);
+      }
+
+      .intro-text {
+        text-align: center;
+        margin-bottom: 40px;
+        padding: 20px;
+      }
+
+      .intro-text p {
+        color: #ccc;
+        font-size: 16px;
+        margin: 10px 0;
+        line-height: 1.6;
+      }
+
+      .highlight-box {
+        background: rgba(212, 175, 55, 0.1);
+        border: 1px solid rgba(212, 175, 55, 0.3);
+        border-radius: 8px;
+        padding: 20px;
+        margin: 25px 0;
+      }
+
+      .highlight-box h4 {
+        color: #d4af37;
+        margin-bottom: 10px;
+        text-align: center;
+      }
+
+      /* 移动端适配 */
+      @media (max-width: 768px) {
+        .timeline-line {
+          left: 30px;
+        }
+
+        .timeline-item {
+          flex-direction: row !important;
+          margin-left: 50px;
+        }
+
+        .timeline-point {
+          left: 30px;
+        }
+
+        .timeline-content {
+          margin-left: 20px;
+        }
+
+        .timeline-title {
+          font-size: 18px;
+        }
+
+        .map-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="news-container">
+      <div class="news-header">
+        <h1 class="news-title">《魔神起源》等级与地图开放指南</h1>
+        <div class="news-date">发布时间：2025-10-17</div>
+      </div>
+
+      <div class="news-content">
+        <div class="intro-text">
+          <p>欢迎来到<span class="highlight">魔神大陆</span>的冒险之旅！为了给各位勇士提供循序渐进的游戏体验，我们将分阶段开放等级上限和新地图。</p>
+          <p>以下是详细的开放时间安排，帮助您更好地规划冒险历程。</p>
+        </div>
+
+        <div class="timeline-container">
+          <div class="timeline-line"></div>
+
+          <!-- 第一阶段：正式开服 -->
+          <div class="timeline-item">
+            <div class="timeline-point"></div>
+            <div class="timeline-content">
+              <div class="phase-number">第一阶段</div>
+              <h3 class="timeline-title">🎮 正式开服</h3>
+              <p><span class="level-badge">等级上限 40级</span></p>
+              <p>初次踏上魔神大陆，探索基础地图，熟悉游戏玩法。</p>
+              <div class="map-grid">
+                <div class="map-item">
+                  <div class="map-name">废矿区</div>
+                </div>
+                <div class="map-item">
+                  <div class="map-name">曜日神庙</div>
+                </div>
+                <div class="map-item">
+                  <div class="map-name">邪恶虫巢</div>
+                </div>
+                <div class="map-item">
+                  <div class="map-name">城主古墓</div>
+                </div>
+                <div class="map-item">
+                  <div class="map-name">黑暗寺庙</div>
+                </div>
+                <div class="map-item">
+                  <div class="map-name">迷雾森林</div>
+                </div>
+                <div class="map-item">
+                  <div class="map-name">丛林迷宫</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 第二阶段：开服10天 -->
+          <div class="timeline-item">
+            <div class="timeline-point"></div>
+            <div class="timeline-content">
+              <div class="phase-number">第二阶段</div>
+              <h3 class="timeline-title">⏰ 开服10天</h3>
+              <p><span class="level-badge">等级上限 45级</span></p>
+              <p>经过初步历练，勇士们将迎来新的挑战和机遇。</p>
+              <div class="map-grid">
+                <div class="map-item">
+                  <div class="map-name">伏魔殿</div>
+                </div>
+                <div class="map-item">
+                  <div class="map-name">未知神殿</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 第三阶段：开服30天 -->
+          <div class="timeline-item">
+            <div class="timeline-point"></div>
+            <div class="timeline-content">
+              <div class="phase-number">第三阶段</div>
+              <h3 class="timeline-title">🌟 开服30天</h3>
+              <p><span class="level-badge">等级上限 50级</span></p>
+              <p>实力大幅提升后，探索更广阔的魔神大陆，挑战更强力的敌人。</p>
+              <div class="map-grid">
+                <div class="map-item">
+                  <div class="map-name">噬月峡谷</div>
+                </div>
+                <div class="map-item">
+                  <div class="map-name">烈焰魔窟</div>
+                </div>
+                <div class="map-item">
+                  <div class="map-name">苍海岛</div>
+                </div>
+                <div class="map-item">
+                  <div class="map-name">幻境海域1层</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 后续开放内容 -->
+        <div class="future-section">
+          <h3 class="future-title">
+            <span>🔮</span>
+            <span>后续开放内容</span>
+          </h3>
+          <p style="color: #ccc; margin-bottom: 15px;">
+            随着游戏版本更新，更多精彩内容将陆续开放。丰富的地图玩法正在开发中，敬请期待！
+          </p>
+          <!-- <div class="future-maps">
+            <div class="future-map-item">🏔️ 龙血岭</div>
+            <div class="future-map-item">⚰️ 黄泉洞</div>
+            <div class="future-map-item">🌊 幻境海域2-3层</div>
+            <div class="future-map-item">🗿 龙血祭坛</div>
+            <div class="future-map-item">🔥 炎龙巢穴</div>
+          </div> -->
+        </div>
+
+        <!-- 温馨提示 -->
+        <div class="highlight-box">
+          <h4>📢 温馨提示</h4>
+          <ul style="color: #ccc; line-height: 1.8; margin: 0; padding-left: 20px;">
+            <li>各阶段的具体开放时间请关注游戏内公告</li>
+            <li>新地图开放时可能伴随新的任务系统和奖励机制</li>
+            <li>建议提前做好准备，提升角色实力以迎接新挑战</li>
+            <li>遇到问题可联系官方客服获取帮助</li>
+          </ul>
+        </div>
+
+        <!-- 重要说明 -->
+        <div class="note-box">
+          <h4>⚖️ 重要说明</h4>
+          <p style="color: #ccc; line-height: 1.8; margin: 0;">
+            起源大魔神开发与运营方有权对具体安排进行澄清或补充说明。后续开放等级与地图请关注官方公告。
+          </p>
+        </div>
+
+        <div class="last-sentence">
+          <p>
+            <em>愿各位勇士在魔神大陆的冒险旅程中，不断成长，书写属于自己的传奇！</em>
+          </p>
+          <p class="signature">
+            <strong>《魔神起源》开发组</strong>
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
